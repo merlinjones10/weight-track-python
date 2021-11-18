@@ -17,9 +17,8 @@ class Measurement:
 def calcAvg(weights):
     return round(sum(weights) / 7, 1)
 
-def kgToLbs(kgs):
-    pounds = kgs * 2.2046
-    return pounds
+def kgToLbs(lbs):
+    return lbs / 2.2046
 
 def takeMeasurement():
     todaysMeasurement = int(input("Enter today's weight: "))
@@ -39,11 +38,11 @@ def displayEach():
     items = c.fetchmany(7)
     allWeights = [x[1] for x in items]
     averageWeight = calcAvg(allWeights)
-    lbsConversion = round(kgToLbs(averageWeight), 2)
+    lbsConversion = round(kgToLbs(averageWeight), 1)
     print('Weeks weights: ')
     for item in items:
         print(f"-{item[0]}  \t - {item[1]}kg")
-    print(f"\nAverage: {averageWeight}kg --- or --- {lbsConversion}lbs ")
+    print(f"\nAverage: {averageWeight} lbs --- or --- {lbsConversion} kgs ")
 
 # ------------ PROGRAM FLOW --------------- #
 takeMeasurement()

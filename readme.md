@@ -1,5 +1,2 @@
-#Plan
-Create an error check for non int entries into the weight(regex)
-create the average weight box from last 5 measurements
-style
-package into exe
+# A simple weight tracking app with GUI. 
+Build in python, using a local sqlite database, every day a user enters their weight. They can then see the average weight over the last 7 measurements. ]

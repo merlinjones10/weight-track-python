@@ -48,11 +48,16 @@ class Application(tk.Frame):
         self.exit_btn = tk.Button(
             self.main, text="Clear Input", width=12, command=self.clear_text)
         self.exit_btn.grid(row=2, column=3)
-        
-        self.display_btn = tk.Button(self.main, text="Show Average", width=12, command=self.add_data)
+        # Average Label
+        self.display_btn = tk.Button(self.main, text="Show Average", width=12, command=self.calculate_average)
         self.display_btn.grid(row=2, column=4)
-        self.display_label = tk.Label(self.main, text='Average', font=(14))
+        self.display_label = tk.Label(self.main, text='7 Day average:', font=(14))
+        self.average_text = tk.StringVar()
+        self.average_text.set('')
+        self.display_average_label = tk.Label(self.main, textvariable=self.average_text, font=(14))
+
         self.display_label.grid(row=3, column=5)
+        self.display_average_label.grid(row=4, column=5)
         ##
         ## View box
         ##
@@ -68,6 +73,7 @@ class Application(tk.Frame):
         ##
         ## end view box end
         ##
+
 
     def add_data(self):
         if self.weight_text.get() == '' or self.date_text.get() == '':
@@ -115,6 +121,11 @@ class Application(tk.Frame):
     def clear_text(self):
         self.weight_entry.delete(0, tk.END)
         self.date_entry.delete(0, tk.END)
+
+    def calculate_average(self):
+            list_weights = [x[0] for x in db.fetch_seven()]
+            average = round(sum(list_weights) / 7, 1)
+            self.average_text.set(f'{average} lbs or {round(average /2.2046, 1)}kgs')
 
 
 
